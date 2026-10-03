@@ -15,9 +15,9 @@ if (!existsSync(target)) mkdirSync(target, { recursive: true })
 if (!existsSync(link)) {
   try {
     symlinkSync(target, link, 'junction')
-    console.log('[mak] linked public/workspace -> workspace')
+    console.log('[atlas] linked public/workspace -> workspace')
   } catch (err) {
-    console.warn(`[mak] could not create public/workspace link: ${err.message}`)
-    console.warn('[mak] reports will 404 until the link exists')
+    console.warn(`[atlas] could not create public/workspace link: ${err.message}`)
+    console.warn('[atlas] reports will 404 until the link exists')
   }
 }

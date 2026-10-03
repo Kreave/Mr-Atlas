@@ -28,7 +28,7 @@ run(['ci', '--omit=dev'], path.join(runtime, 'service'));
 await cp(path.join(repo, 'dist'), path.join(runtime, 'ui'), { recursive: true });
 // Vite deliberately does not copy the enormous workspace junction. Bundle only UI assets.
 try { await access(path.join(repo, 'public', 'assets')); await cp(path.join(repo, 'public', 'assets'), path.join(runtime, 'ui', 'assets'), { recursive: true }); } catch { /* Optional brand assets. */ }
-await writeFile(path.join(runtime, 'README.txt'), 'Mr. Mak local runtime. Node.js and native ConPTY bindings are bundled. User repositories, keys and CLI logins are not included.\n');
+await writeFile(path.join(runtime, 'README.txt'), 'Mr Atlas local runtime. Node.js and native ConPTY bindings are bundled. User repositories, keys and CLI logins are not included.\n');
 const nodeLicense = path.join(path.dirname(process.execPath), 'LICENSE');
 let license;
 try { license = await readFile(nodeLicense); } catch {

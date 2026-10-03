@@ -27,7 +27,7 @@ html[data-workspace-theme=light]{
   --shadow-1:0 2px 10px #1821360a;--shadow-2:0 8px 28px #18213618;
   --glow-pink:0 0 20px #98445e08;--glow-pink-strong:0 0 28px #98445e14;--glow-amber:0 0 24px #80541b0a;
   --focus-ring:0 0 0 2px #98445e70;
-  --mak-bg:#fff;--mak-surface:#f5f6f9;--mak-border:#202a4020;--mak-text:#232735;--mak-muted:#505b70;--mak-accent:#98445e;
+  --atlas-bg:#fff;--atlas-surface:#f5f6f9;--atlas-border:#202a4020;--atlas-text:#232735;--atlas-muted:#505b70;--atlas-accent:#98445e;
 }
 html[data-workspace-theme=light] *{scrollbar-color:#99a2b3 #edf0f4!important}
 html[data-workspace-theme=light] ::-webkit-scrollbar-track,html[data-workspace-theme=light] ::-webkit-scrollbar-corner{background:#edf0f4}
@@ -47,13 +47,13 @@ html[data-workspace-theme=light] .report-document,html[data-workspace-theme=ligh
 html[data-workspace-theme=light] .markdown-document,html[data-workspace-theme=light] .markdown-reader,
 html[data-workspace-theme=light] .markdown-editor,html[data-workspace-theme=light] .file-preview,
 html[data-workspace-theme=light] .desktop-boot{background:#fff;color:var(--text)}
-html[data-workspace-theme=light] .mak-markdown{color:var(--text)}
-html[data-workspace-theme=light] .mak-markdown :is(h1,h2,h3,h4,th,strong){color:var(--text-bright);border-color:var(--hairline-strong)}
-html[data-workspace-theme=light] .mak-markdown a,html[data-workspace-theme=light] .report-error a{color:var(--pink)}
-html[data-workspace-theme=light] .mak-markdown :is(pre,code,th){background:#f1f3f7;border-color:var(--hairline-strong)}
-html[data-workspace-theme=light] .mak-markdown pre code{background:none}
-html[data-workspace-theme=light] .mak-markdown :is(td,hr){border-color:var(--hairline-strong)}
-html[data-workspace-theme=light] .mak-markdown blockquote{color:var(--text-dim);background:var(--pink-dim);border-color:var(--pink)}
+html[data-workspace-theme=light] .atlas-markdown{color:var(--text)}
+html[data-workspace-theme=light] .atlas-markdown :is(h1,h2,h3,h4,th,strong){color:var(--text-bright);border-color:var(--hairline-strong)}
+html[data-workspace-theme=light] .atlas-markdown a,html[data-workspace-theme=light] .report-error a{color:var(--pink)}
+html[data-workspace-theme=light] .atlas-markdown :is(pre,code,th){background:#f1f3f7;border-color:var(--hairline-strong)}
+html[data-workspace-theme=light] .atlas-markdown pre code{background:none}
+html[data-workspace-theme=light] .atlas-markdown :is(td,hr){border-color:var(--hairline-strong)}
+html[data-workspace-theme=light] .atlas-markdown blockquote{color:var(--text-dim);background:var(--pink-dim);border-color:var(--pink)}
 html[data-workspace-theme=light] .report-loading,html[data-workspace-theme=light] .report-error,
 html[data-workspace-theme=light] .document-status{color:var(--text-dim)}
 html[data-workspace-theme=light] .report-error-actions button{background:#f1f3f7;color:var(--text);border-color:var(--hairline-strong)}
@@ -65,11 +65,11 @@ html[data-workspace-theme=light] .file-preview-body>pre{background:#fff;color:va
 html[data-workspace-theme=light] .file-preview>header small{color:var(--text-muted)}
 html[data-workspace-theme=light] .report-image{background:#f2f4f7;color:var(--text)}
 html[data-workspace-theme=light] .report-image nav{background:#fff;border-color:var(--hairline-strong)}
-html[data-workspace-theme=light] dialog.mak-lightbox{background:#f2f4f7;color:var(--text);border-color:var(--hairline-strong);box-shadow:var(--shadow-2)}
-html[data-workspace-theme=light] .mak-lightbox .mak-lightbox-toolbar{background:#fff;border-color:var(--hairline-strong)}
-html[data-workspace-theme=light] .mak-lightbox .mak-lightbox-caption{color:var(--text)}
-html[data-workspace-theme=light] .mak-lightbox .mak-lightbox-toolbar :is(button,a){background:#f5f6f9;border-color:var(--hairline-strong);color:var(--text)}
-html[data-workspace-theme=light] .mak-lightbox .mak-lightbox-note{color:var(--text-dim)}
+html[data-workspace-theme=light] dialog.atlas-lightbox{background:#f2f4f7;color:var(--text);border-color:var(--hairline-strong);box-shadow:var(--shadow-2)}
+html[data-workspace-theme=light] .atlas-lightbox .atlas-lightbox-toolbar{background:#fff;border-color:var(--hairline-strong)}
+html[data-workspace-theme=light] .atlas-lightbox .atlas-lightbox-caption{color:var(--text)}
+html[data-workspace-theme=light] .atlas-lightbox .atlas-lightbox-toolbar :is(button,a){background:#f5f6f9;border-color:var(--hairline-strong);color:var(--text)}
+html[data-workspace-theme=light] .atlas-lightbox .atlas-lightbox-note{color:var(--text-dim)}
 
 /* Files, Settings, Skills and MCP share the same readable panel surfaces. */
 html[data-workspace-theme=light] .files-rail,html[data-workspace-theme=light] .files-panel{background:#fff;border-color:var(--hairline-strong);color:var(--text)}
@@ -97,7 +97,7 @@ html[data-workspace-theme=light] .voice-panel{background:#fff;border-color:var(-
 html[data-workspace-theme=light] :is(.voice-panel h2,.voice-welcome p,.caption,.activity-item strong){color:var(--text)}
 html[data-workspace-theme=light] :is(.voice-welcome>span,.caption.user,.caption>span,.activity-item small,.activity-item time,.voice-settings,.voice-tabs>button,.voice-working,.previous-voice){color:var(--text-dim)}
 html[data-workspace-theme=light] :is(.voice-settings select,.voice-compose button){background:#f5f6f9;color:var(--pink);border-color:var(--hairline-strong)}
-html[data-workspace-theme=light] :is(.voice-panel header,.voice-settings,.voice-compose,.voice-tabs,.mak-exchange,.activity-item){border-color:var(--hairline)}
+html[data-workspace-theme=light] :is(.voice-panel header,.voice-settings,.voice-compose,.voice-tabs,.atlas-exchange,.activity-item){border-color:var(--hairline)}
 html[data-workspace-theme=light] .voice-tabs>button.selected{color:var(--pink);border-color:var(--pink)}
 html[data-workspace-theme=light] .voice-caption-toggle{color:var(--pink)!important;background:#fff;border-color:var(--hairline-strong)}
 html[data-workspace-theme=light] .desktop-error{background:#fff1f2;color:#8b283d;border-color:#d09aa5}

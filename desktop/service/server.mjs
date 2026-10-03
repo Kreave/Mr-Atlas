@@ -18,13 +18,13 @@ import { QuickActions } from './quick-actions.mjs';
 import { defaultVoiceStyle, voiceSession } from './voice-profile.mjs';
 import { NativeSettings } from './native-settings.mjs';
 import { McpInventory } from './mcp.mjs';
-import { body, equalSecret, json, publicError, readJson, realFile, saveJson, secret } from './util.mjs';
+import { body, equalSecret, json, publicError, readJson, realFile, resolveStateDir, saveJson, secret } from './util.mjs';
 
 const listen = server => new Promise((resolve, reject) => { server.once('error', reject); server.listen(0, '127.0.0.1', () => resolve(`http://127.0.0.1:${server.address().port}`)); });
 
 export async function createService({ repo, uiDir, stateDir, token = secret(), native = () => {}, restoreSessions = false, mcpOptions }) {
   repo = await realpath(repo);
-  stateDir ||= path.join(repo, '.mrmak');
+  stateDir ||= await resolveStateDir(repo);
   const files = new Files(repo);
   const attachments = new Attachments(repo);
   const library = new ContextLibrary(repo);
@@ -32,7 +32,7 @@ export async function createService({ repo, uiDir, stateDir, token = secret(), n
   const sessions = await new Sessions(repo, stateDir).init();
   const environment = parseEnv(await readFile(path.join(repo, '.env'), 'utf8').catch(() => ''));
   const settingsPath = path.join(stateDir, 'settings.json');
-  let settings = { defaultAgent: 'codex', defaultBypass: false, coordinatorModel: environment.MRMAK_COORDINATOR_MODEL?.trim() || null, terminalFontSize: 13, terminalAppearance: 'focus', workspaceTheme: 'dark', coordinatorEffort: 'medium', voiceName: 'cedar', voiceStyle: defaultVoiceStyle, ...await readJson(settingsPath, {}) };
+  let settings = { defaultAgent: 'codex', defaultBypass: false, coordinatorModel: environment.MRATLAS_COORDINATOR_MODEL?.trim() || null, terminalFontSize: 13, terminalAppearance: 'focus', workspaceTheme: 'dark', coordinatorEffort: 'medium', voiceName: 'cedar', voiceStyle: defaultVoiceStyle, ...await readJson(settingsPath, {}) };
   let selectedId = sessions.active().some(item => item.id === settings.selectedId) ? settings.selectedId : sessions.active()[0]?.id || null;
   let workspaceRoute = settings.workspaceRoute || null;
   let settingsTimer;
@@ -111,7 +111,7 @@ export async function createService({ repo, uiDir, stateDir, token = secret(), n
     },
   }).init();
   const quick = await new QuickActions({ stateDir, workspace, context: () => ({ chats: sessions.active(), route: workspaceRoute }), execute: (...args) => coordinator.execute(...args), completed: operation => broadcast('coordinator-result', { operation }) }).init();
-  const askMak = async data => {
+  const askAtlas = async data => {
     if (coordinator.operationPromises.has(data.id) || coordinator.operations.has(data.id)) return coordinator.ask(data);
     return await quick.ask(data) || coordinator.ask(data);
   };
@@ -141,13 +141,13 @@ export async function createService({ repo, uiDir, stateDir, token = secret(), n
   function authorize(request) {
     if (request.headers.host !== new URL(origin).host) throw Object.assign(new Error('Unexpected host'), { status: 403 });
     if (request.headers.origin && request.headers.origin !== origin) throw Object.assign(new Error('Unexpected origin'), { status: 403 });
-    if (!equalSecret(request.headers.authorization, `Bearer ${token}`)) throw Object.assign(new Error('Open Mr. Mak from its desktop launcher'), { status: 401 });
+    if (!equalSecret(request.headers.authorization, `Bearer ${token}`)) throw Object.assign(new Error('Open Mr Atlas from its desktop launcher'), { status: 401 });
   }
   const server = http.createServer(async (request, response) => {
     try {
       const url = new URL(request.url, origin);
       if (request.headers.host !== new URL(origin).host) throw Object.assign(new Error('Unexpected host'), { status: 403 });
-      if (url.pathname === '/health') return json(response, 200, { service: 'mrmak', version: '0.4.14' });
+      if (url.pathname === '/health') return json(response, 200, { service: 'mratlas', version: '0.4.14' });
       if (url.pathname.startsWith('/api/')) {
         authorize(request);
         const method = request.method;
@@ -233,7 +233,7 @@ export async function createService({ repo, uiDir, stateDir, token = secret(), n
           const file = await realpath(path.resolve(data.path));
           native({ type: 'reveal', path: file }); return json(response, 200, { requested: true });
         }
-        if (method === 'POST' && url.pathname === '/api/coordinator') return json(response, 200, await askMak(data));
+        if (method === 'POST' && url.pathname === '/api/coordinator') return json(response, 200, await askAtlas(data));
         if (method === 'POST' && url.pathname === '/api/coordinator/prepare') { await coordinator.start(); return json(response, 200, { ready: true, model: coordinator.model }); }
         if (method === 'POST' && url.pathname === '/api/live/transcript') {
           if (typeof data.id !== 'string' || data.id.length > 200 || !Array.isArray(data.captions)) throw new Error('A voice session and captions are required.');

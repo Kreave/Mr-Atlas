@@ -2,6 +2,13 @@ import { readFile, writeFile, rename, mkdir, realpath, stat } from 'node:fs/prom
 import path from 'node:path';
 import { randomBytes, timingSafeEqual } from 'node:crypto';
 
+// Installs from before the rename to Mr Atlas keep their chats and settings in
+// `.mrmak`. Move that folder once; if it is in use, keep reading it in place.
+export async function resolveStateDir(repo) {
+  const current = path.join(repo, '.mratlas'), legacy = path.join(repo, '.mrmak');
+  if (await stat(current).catch(() => null) || !await stat(legacy).catch(() => null)) return current;
+  try { await rename(legacy, current); return current; } catch { return legacy; }
+}
 export const secret = () => randomBytes(32).toString('base64url');
 export const sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
 export function equalSecret(a, b) {

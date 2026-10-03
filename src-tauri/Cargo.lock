@@ -2191,7 +2191,7 @@ dependencies = [
 ]
 
 [[package]]
-name = "mrmak-workspace"
+name = "mratlas-workspace"
 version = "0.4.17"
 dependencies = [
  "drag",

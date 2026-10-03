@@ -43,7 +43,7 @@ export function codexBinary(env = process.env) {
   if (existsSync(js)) return { file: process.execPath, args: [js] };
   const executable = commandPath('codex', env);
   if (executable && !/\.(cmd|bat|ps1)$/i.test(executable)) return { file: executable, args: [] };
-  throw new Error('Codex CLI is not installed. Install it and sign in once to use Mr. Mak.');
+  throw new Error('Codex CLI is not installed. Install it and sign in once to use Mr Atlas.');
 }
 
 export function terminalCommand(agent, { bypass = false, resumeId, nativeId, effort, opencodeMajor = 1 } = {}) {
@@ -92,11 +92,11 @@ export function childEnvironment(repo) {
   // stay private to the service; CLI subscription authentication is unchanged.
   if (repo) {
     const values = parseEnv(readDotEnv(path.join(repo, '.env')));
-    for (const [name, value] of Object.entries(values)) if (/^MRMAK_MCP_[A-Z0-9_]+$/.test(name) && !env[name]) env[name] = value;
+    for (const [name, value] of Object.entries(values)) if (/^MRATLAS_MCP_[A-Z0-9_]+$/.test(name) && !env[name]) env[name] = value;
   }
   // Drop host-agent identity from the parent so every terminal is an independent CLI.
   for (const key of Object.keys(env)) {
-    if (/^(CLAUDECODE|CLAUDE_CODE_ENTRYPOINT|CODEX_THREAD_ID|CODEX_TURN_ID|CODEX_SHELL|MRMAK_TOKEN|MRMAK_PARENT_PID)$/.test(key) || key.startsWith('MRMAK_OPENCODE_')) delete env[key];
+    if (/^(CLAUDECODE|CLAUDE_CODE_ENTRYPOINT|CODEX_THREAD_ID|CODEX_TURN_ID|CODEX_SHELL|MRATLAS_TOKEN|MRATLAS_PARENT_PID)$/.test(key) || key.startsWith('MRATLAS_OPENCODE_')) delete env[key];
   }
   return env;
 }

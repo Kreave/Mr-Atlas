@@ -1,7 +1,7 @@
 [package]
-name = "mrmak-workspace"
+name = "mratlas-workspace"
 version = "0.4.17"
-description = "Mr. Mak workspace and independent agent terminals"
+description = "Mr Atlas workspace and independent agent terminals"
 authors = ["Mr. Mak Workspace contributors"]
 edition = "2021"
 rust-version = "1.77.2"

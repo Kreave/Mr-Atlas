@@ -37,7 +37,7 @@ for (const [id, agent, fullscreen] of [['codex', 'codex', false], ['claude-class
 }
 let browser;
 try {
-  browser = await chromium.launch({ headless: true, channel: process.env.MRMAK_TEST_BROWSER || 'msedge' });
+  browser = await chromium.launch({ headless: true, channel: process.env.MRATLAS_TEST_BROWSER || 'msedge' });
   const context = await browser.newContext({ viewport: { width: 640, height: 800 }, permissions: ['clipboard-read', 'clipboard-write'] });
   const page = await context.newPage(); page.setDefaultTimeout(6000);
   const errors = []; page.on('pageerror', e => errors.push(e.message));

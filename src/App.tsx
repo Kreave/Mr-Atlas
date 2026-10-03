@@ -2,7 +2,7 @@ import { lazy, Suspense, useCallback, useEffect, useRef, useState } from 'react'
 import type { WorkspaceEntity } from './types'
 import { useWorkspace, archiveCutoff } from './lib/workspace'
 import { parseHash, entityHash, resolveStep, type Route } from './lib/route'
-import MakLogo from './components/MakLogo'
+import AtlasLogo from './components/AtlasLogo'
 import Sidebar from './components/Sidebar'
 import Topbar from './components/Topbar'
 import HomeGrid from './components/HomeGrid'
@@ -13,7 +13,7 @@ const Compare3D = lazy(() => import('./components/Compare3D'))
 const ReportViewer = lazy(() => import('./components/ReportViewer'))
 
 // Freshly-touched work always burns at the top: sort by `updated` (falls back
-// to `created`), regardless of status — a report Mak just edited must not sink
+// to `created`), regardless of status — a report Atlas just edited must not sink
 // under long-lived "active" entities. Status only breaks ties.
 const lastTouched = (e: WorkspaceEntity) => e.updated ?? e.created
 const statusRank = (e: WorkspaceEntity) => (e.status === 'active' ? 0 : 1)
@@ -26,12 +26,12 @@ export default function App() {
   const [query, setQuery] = useState('')
   const [showArchived, setShowArchived] = useState(false)
   const [collapsed, setCollapsed] = useState(
-    () => isDesktop || localStorage.getItem('mak.sidebarCollapsed') === '1',
+    () => isDesktop || localStorage.getItem('atlas.sidebarCollapsed') === '1',
   )
   const searchRef = useRef<HTMLInputElement>(null)
 
   useEffect(() => {
-    localStorage.setItem('mak.sidebarCollapsed', collapsed ? '1' : '0')
+    localStorage.setItem('atlas.sidebarCollapsed', collapsed ? '1' : '0')
   }, [collapsed])
 
   const entities = workspace?.entities ?? []
@@ -70,7 +70,7 @@ export default function App() {
   }, [])
 
   useEffect(() => {
-    document.title = entity ? `Mr. Mak — ${entity.title}` : 'Mr. Mak — Workspace'
+    document.title = entity ? `Mr Atlas — ${entity.title}` : 'Mr Atlas — Workspace'
   }, [entity])
 
   const goHome = useCallback(() => {
@@ -86,7 +86,7 @@ export default function App() {
   if (!workspace) {
     return (
       <div className="boot">
-        <MakLogo size={76} />
+        <AtlasLogo size={76} />
       </div>
     )
   }
@@ -144,10 +144,10 @@ export default function App() {
       <button
         className="sidebar-reopen"
         onClick={() => setCollapsed(false)}
-        title="Show menu — press Mr. Mak's nose ( [ )"
+        title="Show menu — press Mr Atlas's nose ( [ )"
         aria-label="Show menu"
       >
-        <MakLogo size={38} animated={route.id !== 'my-dream-game'} />
+        <AtlasLogo size={38} animated={route.id !== 'my-dream-game'} />
       </button>
 
       <main className="main">
@@ -164,13 +164,13 @@ export default function App() {
         <div className="content">
           <ReportBoundary key={reportUrl || 'home'} onHome={goHome}>
           {entity && reportUrl && step?.viewer === 'compare3d' ? (
-            <Suspense fallback={<div className="boot"><MakLogo size={56} animated={false} /></div>}><Compare3D
+            <Suspense fallback={<div className="boot"><AtlasLogo size={56} animated={false} /></div>}><Compare3D
               key={reportUrl}
               manifestUrl={reportUrl}
               baseUrl={reportUrl.slice(0, reportUrl.lastIndexOf('/'))}
             /></Suspense>
           ) : entity && reportUrl ? (
-            <Suspense fallback={<div className="boot"><MakLogo size={56} animated={false} /></div>}><ReportViewer key={reportUrl} url={reportUrl} title={step?.name ?? entity.title} relativePath={`workspace/${entity.folder}/${step?.path}`} /></Suspense>
+            <Suspense fallback={<div className="boot"><AtlasLogo size={56} animated={false} /></div>}><ReportViewer key={reportUrl} url={reportUrl} title={step?.name ?? entity.title} relativePath={`workspace/${entity.folder}/${step?.path}`} /></Suspense>
           ) : (
             <HomeGrid
               entities={entities}

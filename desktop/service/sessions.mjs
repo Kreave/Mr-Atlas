@@ -83,7 +83,7 @@ export class Sessions extends EventEmitter {
   }
 
   async create(options) {
-    if (this.closed) throw new Error('Mr. Mak is shutting down');
+    if (this.closed) throw new Error('Mr Atlas is shutting down');
     if (this.active().length >= 80) throw new Error('Close a tab before opening another (80 open tab limit). Closed chats remain in History.');
     const agent = String(options.agent || 'codex');
     if (options.effort && !workerEfforts.includes(options.effort)) throw new Error('Reasoning effort must be medium, high, xhigh or max.');
@@ -133,7 +133,7 @@ export class Sessions extends EventEmitter {
     }
     if (this.closed || !session.open) throw new Error('The chat was closed before its terminal started.');
     const command = terminalCommand(session.agent, { bypass: session.bypass, resumeId, nativeId: session.nativeId, effort: session.effort, opencodeMajor });
-    if (session.agent === 'codex') env.CODEX_INTERNAL_ORIGINATOR_OVERRIDE = `mrmak_chat_${session.id}`;
+    if (session.agent === 'codex') env.CODEX_INTERNAL_ORIGINATOR_OVERRIDE = `mratlas_chat_${session.id}`;
     const proc = pty.spawn(command.file, command.args, { name: 'xterm-256color', cwd: session.cwd, env, cols: session.cols, rows: session.rows, useConpty: true, useConptyDll: true });
     session.process = proc;
     session.deviceReplies?.dispose();
@@ -175,7 +175,7 @@ export class Sessions extends EventEmitter {
         if (match) { session.nativeId = match[1]; this.changed(session); }
       }).catch(() => {});
       if (session.agent === 'opencode') readOpencodeState(this.stateDir, session.id).then(state => {
-        if (state?.launchId === env.MRMAK_OPENCODE_LAUNCH_ID) {
+        if (state?.launchId === env.MRATLAS_OPENCODE_LAUNCH_ID) {
           this.bindNative(session, { id: state.nativeId });
           if (state.completion && session.nativeId === state.nativeId) this.nativeEvent(session, { kind: 'turn-completed', id: state.completion });
         }
@@ -184,7 +184,7 @@ export class Sessions extends EventEmitter {
     this.changed(session);
     // Discovery is read-only, and only accepts an unambiguous native session.
     this.beginDiscovery(session);
-    if (session.agent === 'opencode') session.stopNativeWatch = watchOpencode(this.stateDir, session, env.MRMAK_OPENCODE_LAUNCH_ID, state => {
+    if (session.agent === 'opencode') session.stopNativeWatch = watchOpencode(this.stateDir, session, env.MRATLAS_OPENCODE_LAUNCH_ID, state => {
       this.bindNative(session, { id: state.nativeId });
       if (session.nativeId !== state.nativeId) return;
       if (state.completion) this.nativeEvent(session, { kind: 'turn-completed', id: state.completion });
@@ -297,9 +297,9 @@ export class Sessions extends EventEmitter {
   input(id, data, { coordinator = false, submit = false } = {}) {
     const session = this.get(id);
     if (!session.process) throw new Error('This terminal is stopped. Resume it before sending a message.');
-    if (coordinator && session.agent === 'shell') throw new Error('Mr. Mak can send messages to agent chats; type shell commands directly in PowerShell.');
+    if (coordinator && session.agent === 'shell') throw new Error('Mr Atlas can send messages to agent chats; type shell commands directly in PowerShell.');
     if (typeof data !== 'string' || data.length > 64000) throw new Error('Message is too large');
-    if (coordinator && Date.now() - Date.parse(session.lastInputAt || 0) < 2500) throw new Error('You are typing in this chat. Wait a moment before sending through Mr. Mak.');
+    if (coordinator && Date.now() - Date.parse(session.lastInputAt || 0) < 2500) throw new Error('You are typing in this chat. Wait a moment before sending through Mr Atlas.');
     if (coordinator) {
       // Bracketed paste keeps multi-line text a single CLI prompt, then Enter submits it.
       const clean = data.replace(/[\x00-\x08\x0b\x0c\x0e-\x1f\x7f]/g, '').replaceAll('\r', '');
@@ -395,7 +395,7 @@ export class Sessions extends EventEmitter {
     setTimeout(() => { try { if (session.process === proc) proc.kill(); } catch { /* Process already exited. */ } }, 3500).unref();
   }
   async resume(id, nativeId) {
-    if (this.closed) throw new Error('Mr. Mak is shutting down');
+    if (this.closed) throw new Error('Mr Atlas is shutting down');
     const session = this.get(id);
     if (session.stopping) await session.stopping;
     if (session.process) return publicSession(session);
