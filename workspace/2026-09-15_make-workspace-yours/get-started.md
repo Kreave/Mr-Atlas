@@ -1,6 +1,6 @@
 # Getting started
 
-Mr. Mak is a local desktop workspace for working with several agents. Its files
+Mr Atlas is a local desktop workspace for working with several agents. Its files
 are ordinary project files, and its chats are ordinary CLI sessions. You can
 keep using the same agents outside the app.
 
@@ -23,7 +23,7 @@ runtime and local service and installs for the current Windows user. WebView2
 is installed by its bootstrapper if needed. No administrator terminal is needed
 for ordinary app use.
 
-Run **Start Mr. Mak.cmd** from the cloned folder. The app remembers the selected
+Run **Start Mr Atlas.cmd** from the cloned folder. The app remembers the selected
 repository. It opens Workspace and Chats as separate windows with separate
 taskbar identities. Closing a chat saves it to History; restoring its full
 conversation also relies on that CLI's native session files.
@@ -50,24 +50,24 @@ my game. Ask me for the missing game idea before replacing the example.”
 ## Subscriptions, API keys and OpenCode
 
 Claude Code can use a Claude Pro or Max login. Codex can use an eligible ChatGPT
-subscription login. You do not need to add an API key to Mr. Mak for those chats:
+subscription login. You do not need to add an API key to Mr Atlas for those chats:
 it starts the real installed CLI and keeps its normal authentication and limits.
 See [Claude authentication](https://code.claude.com/docs/en/authentication) and
 [Codex authentication](https://developers.openai.com/codex/auth).
 
 For OpenCode, install and configure it first using its own provider setup. Check
-that `opencode` runs from a terminal, then choose **+ > OpenCode** in Mr. Mak.
+that `opencode` runs from a terminal, then choose **+ > OpenCode** in Mr Atlas.
 Your chosen provider determines authentication and billing. A native Claude Code
 subscription does not automatically provide access through third-party clients.
 
 OpenCode chats support History, pinned tabs, files and clipboard screenshots.
 The app observes native session events to keep the correct conversation ID;
 your native OpenCode data must remain available for resume. Keep one conversation
-per Mr. Mak tab. Use a new tab for a new task. OpenCode controls its model and
+per Mr Atlas tab. Use a new tab for a new task. OpenCode controls its model and
 reasoning settings. Auto-approve is off by default, and explicit deny rules still
 apply when it is enabled.
 
-OpenCode 1.x and 2.x use different plugin APIs. Mr. Mak selects the corresponding
+OpenCode 1.x and 2.x use different plugin APIs. Mr Atlas selects the corresponding
 small session observer at launch, without writing global configuration. OpenCode
 2.x runs a private server for each terminal so tab histories stay separate.
 The MCP inspector currently lists Claude, Codex, Kimi and Cursor configurations;
@@ -90,7 +90,7 @@ The Help button opens a quick guide without creating a new chat.
 Copy `.env.example` to `.env` and add your own `OPENAI_API_KEY` to enable the
 OpenAI Live connection. Never commit that file. Sign in to Codex for the
 coordinator. Its model follows your account configuration; an optional
-`MRMAK_COORDINATOR_MODEL` overrides it. Model access depends on your account.
+`MRATLAS_COORDINATOR_MODEL` overrides it. Model access depends on your account.
 
 Voice requests can focus a chat, inspect a report, update a card or hand a larger
 task to a worker. Direct actions stay quick; a visible worker handles deliverables.

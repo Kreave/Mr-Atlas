@@ -20,7 +20,7 @@ for (const entity of entities) {
     assert.ok(content.trim(), `${file} is empty`);
     assert.doesNotMatch(content, /[\u0400-\u04ff]/u, `${file}: authored sample content must be English`);
     if (!file.endsWith('.html')) continue;
-    assert.match(content, /data-mak-report="document"/);
+    assert.match(content, /data-atlas-report="document"/);
     assert.match(content, /_shared\/report\.js/);
     for (const match of content.matchAll(/\b(?:src|href)="([^"#]+)"/g)) {
       if (/^(?:https?:|data:)/.test(match[1])) continue;
@@ -58,6 +58,6 @@ assert.match(await read('desktop/service/server.mjs'), /defaultBypass: false/);
 assert.match(await read('desktop/service/sessions.mjs'), /bypass: options\.bypass === true/);
 assert.match(await read('desktop/service/sessions.mjs'), /pinned = false, bypass = false/);
 const readme = await read('README.md');
-assert.match(readme, /Mr\. Mak is small\.\s+<img src="docs\/assets\/mr-mak\.png"[^>]+>\s*$/);
-await stat(path.join(root, 'docs/assets/mr-mak.png'));
+assert.match(readme, /Mr Atlas is small\.\s+<img src="docs\/assets\/mr-atlas\.png"[^>]+>\s*$/);
+await stat(path.join(root, 'docs/assets/mr-atlas.png'));
 console.log(`Template passed: four cards, one pin, ${images.size} images, ${videos.size} videos, ${skillNames.length} shared skills, empty connections and account placeholders.`);

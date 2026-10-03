@@ -1,6 +1,6 @@
 import type { CSSProperties } from 'react'
 import type { AgentId } from './types'
-import MakLogo from '../components/MakLogo'
+import AtlasLogo from '../components/AtlasLogo'
 
 export function AgentLogo({ agent, size = 18 }: { agent: AgentId; size?: number }) {
   if (agent === 'opencode') return <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" className="agent-logo"><path fillRule="evenodd" d="M4 2h16v20H4V2Zm4 4v14h8V6H8Z" /><path d="M8 6h8v8H8z" opacity=".3" /></svg>
@@ -11,7 +11,7 @@ export function AgentLogo({ agent, size = 18 }: { agent: AgentId; size?: number 
 }
 
 export function Nose({ size = 30, tone = 'pink' }: { size?: number; tone?: 'pink' | 'black' }) {
-  return <MakLogo size={size} tone={tone} />
+  return <AtlasLogo size={size} tone={tone} />
 }
 export function Icon({ name, size = 18, style }: { name: string; size?: number; style?: CSSProperties }) {
   const paths: Record<string, string> = {

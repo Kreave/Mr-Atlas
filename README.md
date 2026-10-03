@@ -1,21 +1,21 @@
-# Mr. Mak Workspace
+# Mr Atlas Workspace
 
 Your agents do the work. You keep the useful parts in view.
 
-Mr. Mak gives you two connected windows: real CLI chats on the left, and a
+Mr Atlas gives you two connected windows: real CLI chats on the left, and a
 Workspace for projects, research, images and files. Keep both open, or minimize
 the Workspace while an agent helps you in Blender, a game engine or your browser.
 
 **Prerequisite: install and configure Codex CLI, Claude Code CLI or OpenCode
-before setting up Mr. Mak.** You need at least one. They can run side by side
-and are separate installations, not bundled with Mr. Mak.
+before setting up Mr Atlas.** You need at least one. They can run side by side
+and are separate installations, not bundled with Mr Atlas.
 
 - [Install Codex CLI](https://developers.openai.com/codex/cli)
 - [Install Claude Code CLI](https://code.claude.com/docs/en/setup)
 - [Install OpenCode](https://opencode.ai/docs/)
 
 **Do I need an API key?** No, not for Claude Code or Codex chats when you sign
-in with an eligible subscription. Mr. Mak runs the real CLI with its existing
+in with an eligible subscription. Mr Atlas runs the real CLI with its existing
 login: Claude Pro/Max can use Claude Code, and Codex can use ChatGPT subscription
 access. Normal plan limits still apply. API billing is an alternative, not a
 requirement. See [Claude authentication](https://code.claude.com/docs/en/authentication)
@@ -29,7 +29,7 @@ The optional voice coordinator specifically requires **Codex CLI** and your own
 **OpenAI API key**. Voice API usage is billed separately. Leave voice off to use
 subscription-backed CLI chats without an API key.
 
-![Mr. Mak Workspace home with project cards and the Files tree open](docs/assets/workspace-overview.png)
+![Mr Atlas Workspace home with project cards and the Files tree open](docs/assets/workspace-overview.png)
 
 ## Everyday tools
 
@@ -59,7 +59,7 @@ Use **Use this template** on GitHub to create your own repository, then clone it
 into a folder you control. Open that folder in your installed Codex CLI,
 Claude Code CLI or OpenCode and paste:
 
-> Set up this Mr. Mak Workspace repository on my computer. Read AGENTS.md and
+> Set up this Mr Atlas Workspace repository on my computer. Read AGENTS.md and
 > docs/getting-started.md, check the prerequisites, and help me run the Windows
 > desktop app. Use my own CLI accounts. Leave optional voice, paid providers,
 > MCP connections and the Win-key shortcut off until I choose to connect them.
@@ -72,15 +72,15 @@ your own agent accounts and any services you want to use.
 ## Run on Windows
 
 1. Download the installer from [Releases](https://github.com/witnesstodark/mr-mak-workspace/releases/latest)
-   and install **Mr. Mak Workspace**.
-2. Open **Start Mr. Mak.cmd** in your cloned repository. On a first launch from
+   and install **Mr Atlas Workspace**.
+2. Open **Start Mr Atlas.cmd** in your cloned repository. On a first launch from
    the Start menu, select that repository when asked.
 3. Use **+** in Chats to open an installed CLI. Sign in with your own account.
 
 The installer includes the local Node service. It does not include Codex,
 Claude Code, OpenCode, Kimi, Blender, Python or provider accounts.
 
-**Already using Mr. Mak?** Read the [0.4.17 update notes](CHANGELOG.md) for Workspace
+**Already using Mr Atlas?** Read the [0.4.17 update notes](CHANGELOG.md) for Workspace
 themes and browser preview fixes. Follow the
 [update guide](docs/updating.md) to update the app and add skills to your existing
 repository without replacing your projects.
@@ -142,7 +142,7 @@ You can work entirely through the CLI chats. The floating nose adds an optional
 voice assistant: OpenAI Live supplies the voice connection over API, and the
 coordinator uses your signed-in Codex CLI. Voice API usage is billed separately
 from a CLI subscription. The coordinator uses your Codex model configuration
-unless you set `MRMAK_COORDINATOR_MODEL` in `.env`.
+unless you set `MRATLAS_COORDINATOR_MODEL` in `.env`.
 
 fal.ai, Higgsfield and other providers are optional and use your own accounts.
 MCP configuration starts empty. The MCP panel explains where connections are
@@ -167,6 +167,6 @@ is supplied for learning and remixing; see [third-party notices](THIRD_PARTY_NOT
 
 ---
 
-Mr. Mak is small.
+Mr Atlas is small.
 
-<img src="docs/assets/mr-mak.png" alt="Mr. Mak, a small plush pig wearing a black hat" width="420">
+<img src="docs/assets/mr-atlas.png" alt="Mr Atlas, a small plush pig wearing a black hat" width="420">

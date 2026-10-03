@@ -33,7 +33,7 @@ for (const agent of ['codex', 'claude', 'opencode', 'kimi', 'shell']) {
 }
 let browser;
 try {
-  browser = await chromium.launch({ headless: true, channel: process.env.MRMAK_TEST_BROWSER || 'msedge' });
+  browser = await chromium.launch({ headless: true, channel: process.env.MRATLAS_TEST_BROWSER || 'msedge' });
   const context = await browser.newContext({ viewport: { width: 900, height: 800 }, permissions: ['clipboard-read', 'clipboard-write'] });
   const page = await context.newPage(); page.setDefaultTimeout(10000);
   const errors = []; page.on('pageerror', error => errors.push(error.message));
@@ -60,7 +60,7 @@ try {
   await page.getByRole('button', { name: 'Toggle files', exact: true }).click();
   await page.getByRole('treeitem', { name: /^knowledge$/ }).click();
   await page.getByRole('treeitem', { name: /^notes.md/ }).click();
-  await page.getByRole('heading', { name: 'A useful document' }).waitFor(); assert.equal(await page.locator('.mak-markdown table').count(), 1);
+  await page.getByRole('heading', { name: 'A useful document' }).waitFor(); assert.equal(await page.locator('.atlas-markdown table').count(), 1);
   await page.getByRole('button', { name: 'Edit', exact: true }).click();
   await page.getByRole('textbox', { name: 'Edit notes.md' }).fill('# Edited document\n\nUnicode: русский 🐽\n');
   await page.getByRole('textbox', { name: 'Edit notes.md' }).press('Control+s');

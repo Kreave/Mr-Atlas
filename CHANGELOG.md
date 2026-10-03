@@ -1,5 +1,18 @@
 # Changelog
 
+## Unreleased
+
+- Renamed Mr. Mak to Mr Atlas in the app, installer, launcher, documentation,
+  skills and code. The Windows app is now **Mr Atlas Workspace**
+  (`mratlas-workspace.exe`, identifier `com.mratlas.workspace`), so it installs
+  next to an existing Mr. Mak install instead of replacing it.
+- Local state moves from `.mrmak/` to `.mratlas/` the first time the new app
+  starts. Chats, settings and Markdown recovery copies are kept, and Codex chats
+  started before the rename are still found.
+- Report and Markdown styling hooks changed from `mak` to `atlas` (for example
+  `data-atlas-report` and `--atlas-*`), and the `MRMAK_*` environment variables
+  are now `MRATLAS_*`. Update any custom report that uses the old names.
+
 ## 0.4.17 - 2026-10-02
 
 - Added Dark, Light and System in Settings > Appearance. Light uses dark text

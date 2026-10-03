@@ -1,6 +1,25 @@
 {
   "entities": [
     {
+      "id": "mr-atlas",
+      "title": "Mr Atlas",
+      "description": "Rebuilding Mr. Mak as a general work powerhouse that builds with work programs like Excel.",
+      "type": "group",
+      "category": "project",
+      "created": "2026-10-04",
+      "updated": "2026-10-04",
+      "folder": "2026-10-04_mr-atlas",
+      "steps": [
+        {
+          "name": "Brief",
+          "path": "brief.md"
+        }
+      ],
+      "status": "active",
+      "pinned": true,
+      "defaultStep": 0
+    },
+    {
       "id": "my-dream-game",
       "title": "My Dream Game",
       "description": "Mr. Mak 64: a small Sky Islands adventure, with character studies, world layouts and a development board.",
@@ -16,7 +35,7 @@
         }
       ],
       "status": "active",
-      "pinned": true,
+      "pinned": false,
       "sample": true,
       "defaultStep": 0
     },

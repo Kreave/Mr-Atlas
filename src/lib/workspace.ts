@@ -51,12 +51,12 @@ export function useWorkspace() {
       if (document.visibilityState === 'visible') reload()
     }
     window.addEventListener('focus', refresh)
-    window.addEventListener('mrmak-workspace-changed', refresh)
+    window.addEventListener('mratlas-workspace-changed', refresh)
     document.addEventListener('visibilitychange', refresh)
     const timer = window.setInterval(refresh, POLL_MS)
     return () => {
       window.removeEventListener('focus', refresh)
-      window.removeEventListener('mrmak-workspace-changed', refresh)
+      window.removeEventListener('mratlas-workspace-changed', refresh)
       document.removeEventListener('visibilitychange', refresh)
       window.clearInterval(timer)
     }

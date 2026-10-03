@@ -11,7 +11,7 @@ function ThemedFrame({ url, onLoad, ...props }: Props) {
   // use a message, preserving scroll position and the report's interactive state.
   const [src] = useState(() => {
     const target = new URL(url, location.href)
-    target.searchParams.set('mrmak-theme', resolved)
+    target.searchParams.set('mratlas-theme', resolved)
     return target.href
   })
   const applyTheme = useCallback(() => {
@@ -22,16 +22,16 @@ function ThemedFrame({ url, onLoad, ...props }: Props) {
     try {
       const doc = element.contentDocument
       if (doc?.documentElement) {
-        if (!doc.querySelector('style[data-mrmak-report-theme]')) {
+        if (!doc.querySelector('style[data-mratlas-report-theme]')) {
           const style = doc.createElement('style')
-          style.dataset.mrmakReportTheme = ''
+          style.dataset.mratlasReportTheme = ''
           style.textContent = reportThemeCSS
           ;(doc.head || doc.documentElement).append(style)
         }
-        doc.documentElement.dataset.mrmakTheme = resolved
+        doc.documentElement.dataset.mratlasTheme = resolved
       }
     } catch { /* Cross-origin reports use the message below. */ }
-    element.contentWindow?.postMessage({ type: 'mrmak:theme', theme: resolved }, new URL(url, location.href).origin)
+    element.contentWindow?.postMessage({ type: 'mratlas:theme', theme: resolved }, new URL(url, location.href).origin)
   }, [resolved, url])
   useEffect(applyTheme, [applyTheme])
   return <iframe {...props} ref={frame} src={src} onLoad={() => { applyTheme(); onLoad?.() }} />

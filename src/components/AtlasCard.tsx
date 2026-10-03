@@ -6,15 +6,15 @@ import { contentUrl } from '../desktop/client'
 /**
  * The design-system card: glass surface over the aura, gradient edge
  * (pink→purple; amber when pinned), glow + lift on hover. Building
- * block of the home grid; mirrored as `.mak-card` in
+ * block of the home grid; mirrored as `.atlas-card` in
  * scripts/shared/report_style.py for generated reports.
  */
-export default function MakCard({ entity }: { entity: WorkspaceEntity }) {
+export default function AtlasCard({ entity }: { entity: WorkspaceEntity }) {
   const steps = entity.steps.length
   return (
     <a
       href={entityHash(entity.id)}
-      className={`mak-card entity-card${entity.pinned ? ' pinned' : ''}`}
+      className={`atlas-card entity-card${entity.pinned ? ' pinned' : ''}`}
       data-entity={entity.id}
     >
       <div className="card-top">

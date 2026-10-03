@@ -12,7 +12,7 @@ xterm.js. The windows share sessions and settings but minimize independently.
 | `src-tauri/src/` | Windows shell integration, taskbar identities, native drag and optional Win key |
 | `workspace/workspace.json` | Card registry |
 | `workspace/_shared/` | Report CSS, image viewer and Help |
-| `.mrmak/` | Local runtime state; ignored by Git |
+| `.mratlas/` | Local runtime state; ignored by Git |
 
 `npm run desktop:build` runs `desktop/prepare.mjs`, builds the React frontend,
 packages the service with a Node executable and production dependencies, then
@@ -29,7 +29,7 @@ configured model. Larger execution tasks go to visible worker terminals. The
 provider's native conversation ID is recorded when available for later resume.
 Codex discovery checks both local and UTC date folders, keeps waiting through
 delayed first prompts, and reads bounded metadata records larger than one small
-buffer. Closing or resuming a tab can recover a missing ID from its exact Mr. Mak
+buffer. Closing or resuming a tab can recover a missing ID from its exact Mr Atlas
 origin marker. Shared working directories alone are not proof of ownership.
 
 New Codex and Claude chats default to `xhigh`; explicit saved effort choices are
@@ -54,7 +54,7 @@ preserving configured plugins, models and providers. No global config is edited.
 OpenCode 2.x uses `--standalone` to isolate the server for each managed terminal.
 
 Observers save only a native session ID, launch identity and activity/completion
-metadata under `.mrmak/`. They do not save prompts or provider credentials.
+metadata under `.mratlas/`. They do not save prompts or provider credentials.
 Root-session identity is captured from an actual native event, not inferred from
 a shared working directory. Resume passes `--session` with that recorded ID.
 A launch-specific marker prevents stale events from changing a new terminal's
@@ -77,7 +77,7 @@ you deliberately use `npm ci --ignore-scripts`, run
 `npm --prefix desktop/service ci` before tests or the local service.
 
 UI tests use an isolated repository and fake terminals. Edge must be available
-on Windows, or set `MRMAK_TEST_BROWSER` to a Playwright browser channel you have
+on Windows, or set `MRATLAS_TEST_BROWSER` to a Playwright browser channel you have
 installed. Live voice and subscription smoke checks are separate scripts with
 explicit opt-in flags; they are never part of the default test command.
 
